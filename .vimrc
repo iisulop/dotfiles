@@ -78,6 +78,7 @@ nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declaration<cr>
 nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
 
 let g:EclimCompletionMethod = 'omnifunc'
+let g:CommandTMatchWindowReverse = 1
 
 
 let g:ycm_extra_conf_globlist = ['/home/iiro/dev/*']
@@ -111,3 +112,4 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 autocmd FileType make setlocal shiftwidth=8 softtabstop=8 noexpandtab
+set background=dark
