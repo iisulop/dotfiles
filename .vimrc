@@ -15,13 +15,16 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-ragtag'
 Bundle 'bling/vim-airline'
 Bundle 'ludovicchabant/vim-lawrencium'
+Bundle 'vim-erlang/vim-erlang-compiler'
+Bundle 'vim-erlang/vim-erlang-tags'
+Bundle 'vim-erlang/vim-erlang-omnicomplete'
+Bundle 'edkolev/erlang-motions.vim'
 
 " Set mouse support on
 set mouse=a
 
 " Always 7 lines showing above and beyond the cursor
 set scrolloff=7
-
 
 " Tab behavior
 set expandtab
@@ -75,6 +78,7 @@ nnoremap <F5> :call CommandTFlush()<cr>:call YcmForceCompileAndDiagnostics()<cr>
 
 " F4 to move between header and source
 nnoremap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+nnoremap <F3> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
 
 " Close buffer, keep split
 nnoremap <leader>c :bp\|bd #<CR>
@@ -113,6 +117,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+autocmd FileType java setlocal shiftwidth=2 softtabstop=8 noexpandtab
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
 autocmd FileType make setlocal shiftwidth=8 softtabstop=8 noexpandtab
 
 set colorcolumn=80
