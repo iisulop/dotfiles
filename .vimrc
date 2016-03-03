@@ -45,8 +45,15 @@ set statusline+=%{fugitive#statusline()}\ 
 set statusline+=[line\ %l\/%L]
 set laststatus=2
 
-if has("autocmd")
+if has('autocmd')
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+set background=dark
+if has('gui_running')
+  "set background=light
+  colorscheme solarized
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 9
 endif
 
 " Map leader to ',' for easier use
@@ -97,11 +104,6 @@ set number
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts = 1
 
-"Highlight over 80 character lines
-augroup vimrc_autocmds
-  autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#111111
-  autocmd BufEnter * match OverLength /\%75v.*/
-augroup END
 
 "Highlight whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -112,4 +114,6 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 autocmd FileType make setlocal shiftwidth=8 softtabstop=8 noexpandtab
-set background=dark
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=NONE ctermfg=red guibg=NONE guifg=pink
