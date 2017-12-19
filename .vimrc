@@ -4,27 +4,39 @@ set nocompatible
 filetype off
 
 " Vundle handles plugins
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
-Bundle 'wincent/Command-T'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-ragtag'
-Bundle 'bling/vim-airline'
-Bundle 'ludovicchabant/vim-lawrencium'
-Bundle 'vim-erlang/vim-erlang-compiler'
-Bundle 'vim-erlang/vim-erlang-tags'
-Bundle 'vim-erlang/vim-erlang-omnicomplete'
-Bundle 'edkolev/erlang-motions.vim'
+Plugin 'gmarik/vundle'
+Plugin 'wincent/Command-T'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-surround'
+Plugin 'bling/vim-airline'
+Plugin 'ludovicchabant/vim-lawrencium'
+Plugin 'brookhong/cscope.vim'
+Plugin 'tfnico/vim-gradle'
+Plugin 'davidhalter/jedi-vim'
+"Plugin 'vim-syntastic/syntastic' "Conflicts with ale
+Plugin 'hsanson/vim-android'
+Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'rhysd/devdocs.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'w0rp/ale' " Requires json description for C/C++ compilation
+
+call vundle#end()
 
 " Set mouse support on
 set mouse=a
 
 " Always 7 lines showing above and beyond the cursor
 set scrolloff=7
+
 
 " Tab behavior
 set expandtab
@@ -66,6 +78,8 @@ let mapleader = ","
 nmap j gj
 nmap k gk
 
+nmap K <Plug>(devdocs-under-cursor)
+
 " Syntax highlighting
 filetype plugin indent on
 syntax on
@@ -90,6 +104,7 @@ nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
 
 let g:EclimCompletionMethod = 'omnifunc'
 let g:CommandTMatchWindowReverse = 1
+let g:commandTMaxFiles = 300000
 
 
 let g:ycm_extra_conf_globlist = ['/home/iiro/dev/*']
@@ -117,9 +132,36 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-autocmd FileType java setlocal shiftwidth=2 softtabstop=8 noexpandtab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
-autocmd FileType make setlocal shiftwidth=8 softtabstop=8 noexpandtab
+autocmd BufRead *.txt setlocal spell
+
+"Find stray \302\204 (nbsp) by showing them as commas
+set listchars+=nbsp:,
+
+
+" Cscope things
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=NONE ctermfg=red guibg=NONE guifg=pink
+autocmd FileType make setlocal shiftwidth=8 softtabstop=8 noexpandtab
+autocmd FileType java setlocal shiftwidth=4 softtabstop=4 noexpandtab
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+
+
+" Just Java things
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
