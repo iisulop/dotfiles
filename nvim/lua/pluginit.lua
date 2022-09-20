@@ -26,6 +26,7 @@ local rt = {
 require('rust-tools').setup(rt)
 
 require('Comment').setup()  -- `gbc` (line) / `gb{motion}` / visual: `gb`
+require('fidget').setup()
 require('hlargs').setup()
 require('hop').setup()
 require('nvim-tree').setup()
@@ -94,3 +95,6 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
+
+local lspconfig = require('lspconfig')
+

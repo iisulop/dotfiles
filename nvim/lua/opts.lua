@@ -7,7 +7,7 @@
 -- updatetime: set updatetime for CursorHold
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
-vim.api.nvim_set_option('updatetime', 300) 
+vim.api.nvim_set_option('updatetime', 100)
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
@@ -28,3 +28,18 @@ let g:vimspector_sidebar_width = 85
 let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
+
+-- Make fidget text readable
+vim.cmd([[
+hi! FidgetTask ctermbg=NONE guibg=NONE
+]])
+require('fidget').setup({
+  text = {
+    spinner = "moon",         -- animation shown when tasks are ongoing
+  },
+  timer = {
+    spinner_rate = 125,       -- frame rate of spinner animation, in ms
+    fidget_decay = 5000,      -- how long to keep around empty fidget, in ms
+    task_decay = 3000,        -- how long to keep around completed task, in ms
+  }
+})

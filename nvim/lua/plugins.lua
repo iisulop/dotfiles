@@ -3,7 +3,8 @@ return require('packer').startup(function(use)
   use 'anott03/nvim-lspinstall'
   use 'folke/todo-comments.nvim'
   use 'folke/trouble.nvim'
-  use 'neovim/nvim-lspconfig' 
+  use 'j-hui/fidget.nvim'
+  use 'khaveesh/vim-fish-syntax'
   use 'kyazdani42/nvim-tree.lua'
   use 'kyazdani42/nvim-web-devicons'
   use 'lewis6991/impatient.nvim'
@@ -12,6 +13,7 @@ return require('packer').startup(function(use)
     'm-demare/hlargs.nvim',
     requires = { 'nvim-treesitter/nvim-treesitter' }
   }
+  use 'neovim/nvim-lspconfig'
   use 'numToStr/Comment.nvim'
   use 'nvim-lua/completion-nvim'
   use 'nvim-treesitter/nvim-treesitter'
