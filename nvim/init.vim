@@ -19,6 +19,8 @@ set expandtab       " tabs are space
 set autoindent
 set copyindent      " copy indent from the previous line
 
+set listchars=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
+
 autocmd BufNewFile,BufRead *.elm set shiftwidth=4 | set tabstop=4
 autocmd BufNewFile,BufRead *.hs set shiftwidth=2 | set tabstop=2
 autocmd BufNewFile,BufRead *.json set shiftwidth=2 | set tabstop=2
@@ -67,6 +69,7 @@ lua require('completion')
 lua require('lsp')
 lua require('keys')
 
+match errorMsg /\s\+$/
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
