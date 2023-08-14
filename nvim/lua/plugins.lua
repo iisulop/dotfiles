@@ -1,9 +1,15 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 return require('packer').startup(function(use)
   use 'anott03/nvim-lspinstall'
-  use 'folke/todo-comments.nvim'
+  use {
+    'folke/todo-comments.nvim',
+    branch = 'neovim-pre-0.8.0',
+  }
   use 'folke/trouble.nvim'
-  use 'j-hui/fidget.nvim'
+  use {
+    'j-hui/fidget.nvim',
+    tag = "legacy"
+  }
   use 'khaveesh/vim-fish-syntax'
   use 'kyazdani42/nvim-tree.lua'
   use 'kyazdani42/nvim-web-devicons'
